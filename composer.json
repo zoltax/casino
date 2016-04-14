@@ -1,0 +1,12 @@
+{
+  "name": "zoltax/casino",
+  "description": "sample test casino application",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Filip Kulig",
+      "email": "filipkulig@gmail.com"
+    }
+  ]
+}
