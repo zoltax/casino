@@ -7,7 +7,6 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 	public function testClass(){
 
 		$casinoEntity = new Entity\Casino();
-
 		$this->assertEquals('CC\Entity\Casino',get_class($casinoEntity));
 	}
 
@@ -67,7 +66,7 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("-1.72395354606773", $casino->getLongitude());
 	}
 
-	public function testGetDataAsArray()
+	public function testGetDataAsAnArray()
 	{
 		$casino = new Entity\Casino();
 		$data = $casino->asArray();
@@ -80,6 +79,31 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertArrayHasKey('latitude', $data);
 		$this->assertArrayHasKey('longitude', $data);
 	}
+
+	public function testAddOpeningTimes()
+	{
+		$casino = new Entity\Casino();
+		$this->assertEmpty($casino->getOpeningTimes());
+
+		$openingTime = new Entity\OpeningTime();
+		$openingTime->setDay('Monday');
+		$openingTime->setOpeningTime('7:00');
+		$openingTime->setClosingTime('13:00');
+
+		$casino->addOpeningTime($openingTime);
+
+		$openingTimes = $casino->getOpeningTimes();
+		$this->assertCount(1,$openingTimes);
+
+		$this->assertEquals($openingTime, array_pop($openingTimes));
+		$casino->addOpeningTime($openingTime);
+		$this->assertCount(2, $casino->getOpeningTimes());
+
+
+
+
+	}
+
 
 
 }

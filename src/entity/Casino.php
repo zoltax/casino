@@ -13,6 +13,7 @@ class Casino extends AbstractEntity {
 	private $city           = NULL;
 	private $latitude       = NULL;
 	private $longitude      = NULL;
+	private $openingTime    = [];
 
 	/**
 	 * @return null
@@ -126,16 +127,27 @@ class Casino extends AbstractEntity {
 		$this->postCode = $postCode;
 	}
 
+	public function getOpeningTimes()
+	{
+		return $this->openingTime;
+	}
+
+	public function addOpeningTime(OpeningTime $time)
+	{
+		$this->openingTime[] = $time;
+		return $this;
+	}
+
 	public function asArray()
 	{
 		return [
-			'name' => $this->getName(),
-			'postCode' => $this->getPostCode(),
-			'houseNumber' => $this->getHouseNumber(),
-			'address' => $this->getAddress(),
-			'city' => $this->getCity(),
-			'latitude' => $this->getLatitude(),
-			'longitude' => $this->getLongitude(),
+			'name'          => $this->getName(),
+			'postCode'      => $this->getPostCode(),
+			'houseNumber'   => $this->getHouseNumber(),
+			'address'       => $this->getAddress(),
+			'city'          => $this->getCity(),
+			'latitude'      => $this->getLatitude(),
+			'longitude'     => $this->getLongitude(),
 		];
 	}
 
