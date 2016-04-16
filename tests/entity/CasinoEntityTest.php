@@ -98,12 +98,6 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($openingTime, array_pop($openingTimes));
 		$casino->addOpeningTime($openingTime);
 		$this->assertCount(2, $casino->getOpeningTimes());
-
-
-
-
 	}
-
-
 
 }
