@@ -70,7 +70,8 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 	{
 		$casino = new Entity\Casino();
 		$data = $casino->asArray();
-		$this->assertCount(7, $data);
+		$this->assertCount(8, $data);
+		$this->assertArrayHasKey('id', $data);
 		$this->assertArrayHasKey('name', $data);
 		$this->assertArrayHasKey('post_code', $data);
 		$this->assertArrayHasKey('house_number', $data);

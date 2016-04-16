@@ -141,6 +141,7 @@ class Casino extends AbstractEntity {
 	public function asArray()
 	{
 		return [
+			'id'            => $this->getId(),
 			'name'          => $this->getName(),
 			'post_code'     => $this->getPostCode(),
 			'house_number'  => $this->getHouseNumber(),

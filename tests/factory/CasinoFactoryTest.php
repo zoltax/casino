@@ -19,6 +19,21 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("CC\Entity\Casino",get_class($casino));
 	}
 
+	public function testCreateFromDataId()
+	{
+		$data = [
+			'id' => 1
+		];
+
+		$casinoFactory = new CC\Factory\Casino();
+		$casino = $casinoFactory->createFromData($data);
+
+//		$this->assertEquals("CC\Entity\Casino",get_class($casino));
+
+		$this->assertEquals($casino->getId(),$data['id']);
+	}
+
+
 	public function testCreateFromDataName()
 	{
 		$data = [

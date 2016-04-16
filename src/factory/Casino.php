@@ -9,6 +9,11 @@ class Casino implements FactoryInterface {
 	{
 		$casinoEntity = new \CC\Entity\Casino();
 
+		if (isset($data['id']))
+		{
+			$casinoEntity->setId($data['id']);
+		}
+
 		if (isset($data['name']))
 		{
 			$casinoEntity->setName($data['name']);
