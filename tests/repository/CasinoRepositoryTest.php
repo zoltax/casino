@@ -17,7 +17,7 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 	public function testAddGateway()
 	{
 		$gateway = Mockery::mock()->
-		shouldReceive('getById')->andReturn([])->mock();
+			shouldReceive('getById')->andReturn([])->mock();
 
 		$casinoRepository = new \CC\Repository\Casino($gateway);
 		$this->assertTrue(property_exists($casinoRepository,'gateway'));
@@ -34,7 +34,7 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 
 
 		$gateway = Mockery::mock()->
-		shouldReceive('getById')->andReturn($casinoEntity->asArray())->mock();
+			shouldReceive('getById')->andReturn($casinoEntity->asArray())->mock();
 
 		$casinoRepository = new \CC\Repository\Casino($gateway);
 		$returnedEntity = $casinoRepository->getById(1);
@@ -50,7 +50,7 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
 
 		$gateway = Mockery::mock()->
-		shouldReceive('persist')->andReturn($casinoEntity->asArray())->mock();
+			shouldReceive('persist')->andReturn($casinoEntity->asArray())->mock();
 
 		$casinoRepository = new \CC\Repository\Casino($gateway);
 		$data = $casinoRepository->persist($casinoEntity->asArray());
@@ -58,12 +58,25 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($casinoEntity, $data);
 	}
 
-//	public function testDelete()
-//	{
-//		$data = [];
-//
-//		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
-//	}
+	public function testDelete()
+	{
+
+		$data = [
+			'id' => NULL
+		];
+
+		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
+
+		$gateway = Mockery::mock()->
+			shouldReceive('delete')->andReturn($casinoEntity->asArray())->mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$returnedEntity = $casinoRepository->delete(1);
+
+		$this->assertNull($returnedEntity->getId());
+
+
+	}
 
 
 
