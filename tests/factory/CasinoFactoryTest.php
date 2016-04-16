@@ -137,6 +137,7 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$data = [
 			'opening_times' => [
 				[
+					'id' => NULL,
 					'day' => 'Monday',
 					'opening_time' => '07:00',
 					'closing_time' => '19:00',

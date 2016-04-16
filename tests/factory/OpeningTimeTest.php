@@ -18,6 +18,20 @@ class OpeningTimeFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("CC\Entity\OpeningTime",get_class($openingTime));
 	}
 
+	public function testCreateFromId()
+	{
+
+		$data = [
+			'id' => 1,
+		];
+
+		$openingTimeFactory = new Factory\OpeningTime();
+		$openingTime = $openingTimeFactory->createFromData($data);
+
+		$this->assertEquals($data['id'], $openingTime->getId());
+
+	}
+
 	public function testCreateFromDay()
 	{
 

@@ -65,9 +65,10 @@ class OpeningTime extends AbstractEntity {
 	public function asArray()
 	{
 		return [
+			'id'            => $this->getId(),
 			'day'           => $this->getDay(),
-			'opening_time'   => $this->getOpeningTime(),
-			'closing_time'   => $this->getClosingTime()
+			'opening_time'  => $this->getOpeningTime(),
+			'closing_time'  => $this->getClosingTime()
 		];
 	}
 

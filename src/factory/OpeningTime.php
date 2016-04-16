@@ -9,6 +9,11 @@ class OpeningTime implements FactoryInterface
 	{
 		$openingTimesEntity = new \CC\Entity\OpeningTime();
 
+		if (isset($data['id']))
+		{
+			$openingTimesEntity->setId($data['id']);
+		}
+
 		if (isset($data['day']))
 		{
 			$openingTimesEntity->setDay($data['day']);
