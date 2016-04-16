@@ -75,7 +75,7 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($casino->getHouseNumber(),$data['house_number']);
 	}
 
-	public function testCreateFromDataHouseCity()
+	public function testCreateFromDataCity()
 	{
 		$data = [
 			'city' => "Newcastle upon Tyne"
@@ -89,7 +89,7 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($casino->getCity(),$data['city']);
 	}
 
-	public function testCreateFromDataHouseLongitude()
+	public function testCreateFromDataLongitude()
 	{
 		$data = [
 			'longitude' => "-1.72395354606773"
@@ -103,7 +103,7 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($casino->getLongitude(),$data['longitude']);
 	}
 
-	public function testCreateFromDataHouseLatitude()
+	public function testCreateFromDataLatitude()
 	{
 		$data = [
 			'latitude' => "54.9844250712142"
@@ -115,6 +115,24 @@ class CasinoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("CC\Entity\Casino",get_class($casino));
 
 		$this->assertEquals($casino->getLatitude(),$data['latitude']);
+	}
+
+	public function testCreateFromDataAddOpeningHours()
+	{
+		$data = [
+			'opening_times' => [
+				[
+					'day' => 'Monday',
+					'opening_time' => '07:00',
+					'closing_time' => '19:00',
+				]
+			]
+		];
+
+		$casinoFactory = new CC\Factory\Casino();
+		$casino = $casinoFactory->createFromData($data);
+
+		$this->assertEquals($data['opening_times'][0], $casino->getOpeningTimes()[0]->asArray());
 	}
 
 

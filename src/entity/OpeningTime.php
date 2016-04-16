@@ -66,8 +66,8 @@ class OpeningTime extends AbstractEntity {
 	{
 		return [
 			'day'           => $this->getDay(),
-			'openingTime'   => $this->getOpeningTime(),
-			'closingTime'   => $this->getClosingTime()
+			'opening_time'   => $this->getOpeningTime(),
+			'closing_time'   => $this->getClosingTime()
 		];
 	}
 

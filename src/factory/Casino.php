@@ -3,7 +3,7 @@
 namespace CC\Factory;
 
 
-class Casino {
+class Casino implements FactoryInterface {
 
 	public function createFromData($data)
 	{
@@ -42,6 +42,16 @@ class Casino {
 		if (isset($data['latitude']))
 		{
 			$casinoEntity->setLatitude($data['latitude']);
+		}
+
+		if (isset($data['opening_times']))
+		{
+			$openingTimeFactory = new OpeningTime();
+			foreach ($data['opening_times'] as $openingTimeData)
+			{
+				$openingTimeEntity = $openingTimeFactory->createFromData($openingTimeData);
+				$casinoEntity->addOpeningTime($openingTimeEntity);
+			}
 		}
 
 		return $casinoEntity;

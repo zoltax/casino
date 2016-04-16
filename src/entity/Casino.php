@@ -142,8 +142,8 @@ class Casino extends AbstractEntity {
 	{
 		return [
 			'name'          => $this->getName(),
-			'postCode'      => $this->getPostCode(),
-			'houseNumber'   => $this->getHouseNumber(),
+			'post_code'      => $this->getPostCode(),
+			'house_number'   => $this->getHouseNumber(),
 			'address'       => $this->getAddress(),
 			'city'          => $this->getCity(),
 			'latitude'      => $this->getLatitude(),

@@ -40,8 +40,8 @@ class OpeningTimeEntityTest extends PHPUnit_Framework_TestCase {
 		$data = $openingTimeEntity->asArray();
 		$this->assertCount(3, $data);
 		$this->assertArrayHasKey('day', $data);
-		$this->assertArrayHasKey('openingTime', $data);
-		$this->assertArrayHasKey('closingTime', $data);
+		$this->assertArrayHasKey('opening_time', $data);
+		$this->assertArrayHasKey('closing_time', $data);
 	}
 
 }
