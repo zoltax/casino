@@ -78,6 +78,23 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 
 	}
 
+	public function testGetAll()
+	{
+		$data = [
+			'id' => 1
+		];
+
+		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
+		$gateway = Mockery::mock()->
+			shouldReceive('getAll')->andReturn([$casinoEntity->asArray()])->mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$data = $casinoRepository->getAll();
+
+		$this->assertEquals([$casinoEntity],$data);
+
+	}
+
 
 
 }

@@ -14,3 +14,9 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->get('/casino', 'CasinoController@index');
+
+$app->get('/casino/add', 'CasinoController@add');
+
+$app->post('/casino/save', 'CasinoController@save');

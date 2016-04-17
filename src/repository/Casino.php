@@ -33,4 +33,18 @@ class Casino implements RepositoryInterface {
 		$entity = (new \CC\Factory\Casino())->createFromData($data);
 		return $entity;
 	}
+
+	public function getAll()
+	{
+		$data = $this->gateway->getAll();
+		$entities = [];
+		foreach ( $data as $casino)
+		{
+			$entity = (new \CC\Factory\Casino())->createFromData($casino);
+			$entities[] = $entity;
+		}
+
+		return $entities;
+
+	}
 }

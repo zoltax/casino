@@ -19,4 +19,30 @@ class Casino {
 		$casinoEntity = $this->casinoRepository->getById($id);
 		return $casinoEntity;
 	}
+
+	public function getAll()
+	{
+		$casinoEntities = $this->casinoRepository->getAll();
+
+		$dataToReturn = [];
+
+		foreach ( $casinoEntities as $casino)
+		{
+			$dataToReturn[] = $casino->asArray();
+		}
+
+		return $dataToReturn;
+
+	}
+
+	public function persist($data)
+	{
+		//$entity = (new \CC\Factory\Casino())->createFromData($data);
+
+		$entity = $this->casinoRepository->persist($data);
+
+		return $entity->asArray();
+
+	}
+
 }

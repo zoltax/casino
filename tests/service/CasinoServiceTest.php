@@ -28,4 +28,48 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($data,$casinoEntity);
 	}
 
+	public function testGetAll()
+	{
+		$casinoEntity = (new \CC\Factory\Casino())->createFromData(['id' => 1]);
+
+		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
+			->shouldReceive('getAll')->andReturn([$casinoEntity])
+			->mock();
+
+		$casinoService = new CC\Service\Casino($casinoRepository);
+
+		$data = $casinoService->getAll(1);
+
+		$this->assertEquals($data,[$casinoEntity->asArray()]);
+	}
+
+	public function testPersist()
+	{
+		$data = [
+			'id' => 1,
+			'name' => 'Filip',
+			'post_code' => 'NE15 6NW',
+			'house_number' => 10,
+			'address' => 'Greet Tree Court',
+			'city' => 'Newcastle upon Tyne',
+			'latitude' => '1.23',
+			'longitude' => '35',
+
+		];
+
+		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
+
+		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
+			->shouldReceive('persist')->andReturn($casinoEntity)
+			->mock();
+
+		$casinoService = new CC\Service\Casino($casinoRepository);
+
+		$entity = $casinoService->persist($data);
+
+		$this->assertEquals($entity, $data);
+
+
+	}
+
 }
