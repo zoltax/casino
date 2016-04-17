@@ -11,7 +11,8 @@
   ],
   "require-dev": {
     "phpunit/phpunit": "5.3.*",
-    "mockery/mockery": "dev-master"
+    "mockery/mockery": "dev-master",
+    "laravel/lumen-installer" : "1.*"
   },
   "autoload" : {
     "psr-4" : {
