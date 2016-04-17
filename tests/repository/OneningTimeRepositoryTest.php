@@ -77,7 +77,6 @@ class OpeningTimeRepositoryTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertNull($returnedEntity->getId());
 
-
 	}
 
 	public function testGetOpeningTimeByCasinoId()
@@ -103,8 +102,6 @@ class OpeningTimeRepositoryTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($openingTimeEntity, $entity);
 	}
-
-
 
 
 }
