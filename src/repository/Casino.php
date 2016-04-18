@@ -29,9 +29,7 @@ class Casino implements RepositoryInterface {
 
 	public function delete($id)
 	{
-		$data = $this->gateway->delete($id);
-		$entity = (new \CC\Factory\Casino())->createFromData($data);
-		return $entity;
+		return $this->gateway->delete($id);
 	}
 
 	public function getAll()

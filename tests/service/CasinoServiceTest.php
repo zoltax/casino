@@ -85,4 +85,18 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 
 	}
 
+	public function testDelete()
+	{
+		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
+			->shouldReceive('delete')->andReturn(true)
+			->mock();
+
+		$casinoService = new CC\Service\Casino($casinoRepository);
+		$status = $casinoService->delete(1);
+
+		$this->assertTrue($status);
+
+	}
+
+
 }

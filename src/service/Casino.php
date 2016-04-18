@@ -45,4 +45,9 @@ class Casino {
 
 	}
 
+	public function delete($id)
+	{
+		return $this->casinoRepository->delete($id);
+	}
+
 }

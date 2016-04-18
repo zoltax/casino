@@ -68,20 +68,13 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 	public function testDelete()
 	{
 
-		$data = [
-			'id' => NULL
-		];
-
-		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
-
 		$gateway = Mockery::mock()->
-			shouldReceive('delete')->andReturn($casinoEntity->asArray())->mock();
+			shouldReceive('delete')->andReturn(true)->mock();
 
 		$casinoRepository = new \CC\Repository\Casino($gateway);
-		$returnedEntity = $casinoRepository->delete(1);
+		$status = $casinoRepository->delete(1);
 
-		$this->assertNull($returnedEntity->getId());
-
+		$this->assertTrue($status);
 
 	}
 

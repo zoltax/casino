@@ -8,8 +8,6 @@ class Casino {
 
 	public function test()
 	{
-//		$res = app('db')->select('SELECT * FROM casino');
-
 		$data = \App\Casino::all()->toArray();
 
 		print_r($data);
@@ -47,11 +45,29 @@ class Casino {
 	public function persist($data)
 	{
 
-		$casino = \App\Casino::create($data);
-
+		if ( isset($data['id']))
+		{
+			$casino = \App\Casino::where('id',$data['id'])->first();
+			$casino->fill($data);
+		}
+		else
+		{
+			$casino = \App\Casino::create($data);
+		}
 
 		$casino->save();
 		return $casino->toArray();
+	}
+
+	public function delete($id)
+	{
+		$casino = \App\Casino::where('id',$id)->first();
+		if ($casino)
+		{
+			$casino->delete();
+			return true;
+		}
+		return false;
 	}
 
 }

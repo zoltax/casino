@@ -30,14 +30,22 @@ class CasinoController extends Controller
 
     public function save(Request $request)
     {
-        $data = $this->casinoService->persist($request->all());
-        print_r($data);
+        $this->casinoService->persist($request->all());
+        return redirect('/casino');
     }
 
     public function edit($id)
     {
         $casino = $this->casinoService->getById($id);
+
         return view('add',['casino' => $casino]);
+    }
+
+    public function delete($id)
+    {
+        $status = $this->casinoService->delete($id);
+        return redirect('/casino');
+
     }
 
 }
