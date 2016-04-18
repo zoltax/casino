@@ -8,26 +8,19 @@ use Illuminate\Http\Request;
 
 class CasinoController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     */
+    private $casinoService = NULL;
+
     public function __construct()
     {
-        //
+        $casinoGateway = new Gateway\Casino();
+        $casinoRepository = new Casino($casinoGateway);
+        $this->casinoService = new \CC\Service\Casino($casinoRepository);
     }
 
     public function index()
     {
-
-        $casinoGateway = new Gateway\Casino();
-        $casinoRepository = new Casino($casinoGateway);
-        $casinoService = new \CC\Service\Casino($casinoRepository);
-
-        $casinos = $casinoService->getAll();
-
+        $casinos = $this->casinoService->getAll();
         return view('index',['casinos' => $casinos]);
-
     }
 
     public function add()
@@ -37,28 +30,14 @@ class CasinoController extends Controller
 
     public function save(Request $request)
     {
-
-        $casinoGateway = new Gateway\Casino();
-        $casinoRepository = new Casino($casinoGateway);
-        $casinoService = new \CC\Service\Casino($casinoRepository);
-
-        $input = $request->all();
-
-        $data = $casinoService->persist($input);
-
+        $data = $this->casinoService->persist($request->all());
         print_r($data);
     }
 
     public function edit($id)
     {
-        $casinoGateway = new Gateway\Casino();
-        $casinoRepository = new Casino($casinoGateway);
-        $casinoService = new \CC\Service\Casino($casinoRepository);
-
-        $casino = $casinoService->getById($id);
-
-        print_r($casino);
-        die;
+        $casino = $this->casinoService->getById($id);
+        return view('add',['casino' => $casino]);
     }
 
 }
