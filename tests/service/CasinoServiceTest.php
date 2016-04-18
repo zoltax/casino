@@ -15,7 +15,20 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetById()
 	{
-		$casinoEntity = (new \CC\Factory\Casino())->createFromData(['id' => 1]);
+
+		$data = [
+			'id' => 1,
+			'name' => 'Filip',
+			'post_code' => 'NE15 6NW',
+			'house_number' => 10,
+			'address' => 'Greet Tree Court',
+			'city' => 'Newcastle upon Tyne',
+			'latitude' => '1.23',
+			'longitude' => '35',
+
+		];
+
+		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
 
 		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
 			->shouldReceive('getById')->andReturn($casinoEntity)
@@ -23,9 +36,9 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 
 		$casinoService = new CC\Service\Casino($casinoRepository);
 
-		$data = $casinoService->getById(1);
+		$returnedData = $casinoService->getById(1);
 
-		$this->assertEquals($data,$casinoEntity);
+		$this->assertEquals($data,$returnedData);
 	}
 
 	public function testGetAll()

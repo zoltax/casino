@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <form action="/casino/save" method="post">
         <div class="form-group">
             <label for="name">Name</label>

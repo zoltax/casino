@@ -27,8 +27,15 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 	{
 
 		$data = [
-			'id' => 1
- 		];
+			'id' => 1,
+			'name' => 'Filip',
+			'post_code' => 'NE15 6NW',
+			'house_number' => 10,
+			'address' => 'Greet Tree Court',
+			'city' => 'Newcastle upon Tyne',
+			'latitude' => '1.23',
+			'longitude' => '35',
+		];
 
 		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
 

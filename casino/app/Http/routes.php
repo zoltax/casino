@@ -20,3 +20,5 @@ $app->get('/casino', 'CasinoController@index');
 $app->get('/casino/add', 'CasinoController@add');
 
 $app->post('/casino/save', 'CasinoController@save');
+
+$app->get('/casino/edit/{id}', 'CasinoController@edit');

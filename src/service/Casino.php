@@ -17,7 +17,7 @@ class Casino {
 	public function getById($id)
 	{
 		$casinoEntity = $this->casinoRepository->getById($id);
-		return $casinoEntity;
+		return $casinoEntity->asArray();
 	}
 
 	public function getAll()

@@ -24,9 +24,10 @@ class CasinoController extends Controller
         $casinoRepository = new Casino($casinoGateway);
         $casinoService = new \CC\Service\Casino($casinoRepository);
 
-        $data = $casinoService->getAll();
+        $casinos = $casinoService->getAll();
 
-        print_r($data);
+        return view('index',['casinos' => $casinos]);
+
     }
 
     public function add()
@@ -46,7 +47,18 @@ class CasinoController extends Controller
         $data = $casinoService->persist($input);
 
         print_r($data);
-//        die;
+    }
+
+    public function edit($id)
+    {
+        $casinoGateway = new Gateway\Casino();
+        $casinoRepository = new Casino($casinoGateway);
+        $casinoService = new \CC\Service\Casino($casinoRepository);
+
+        $casino = $casinoService->getById($id);
+
+        print_r($casino);
+        die;
     }
 
 }
