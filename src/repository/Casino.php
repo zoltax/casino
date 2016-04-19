@@ -5,36 +5,37 @@ namespace CC\Repository;
 
 class Casino implements RepositoryInterface {
 
-	private $gateway = NULL;
+	private $casinoGateway = NULL;
+	private $localisationGateway = NULL;
 
-	public function __construct($gateway)
+	public function __construct($casinoGateway,$localisationGateway)
 	{
-		$this->gateway = $gateway;
+		$this->casinoGateway = $casinoGateway;
+		$this->localisationGateway = $localisationGateway;
 	}
 
 	public function getById($id)
 	{
-		$data =  $this->gateway->getById($id);
+		$data =  $this->casinoGateway->getById($id);
 		$entity = (new \CC\Factory\Casino())->createFromData($data);
 		return $entity;
-
 	}
 
 	public function persist($data)
 	{
-		$data = $this->gateway->persist($data);
+		$data = $this->casinoGateway->persist($data);
 		$entity = (new \CC\Factory\Casino())->createFromData($data);
 		return $entity;
 	}
 
 	public function delete($id)
 	{
-		return $this->gateway->delete($id);
+		return $this->casinoGateway->delete($id);
 	}
 
 	public function getAll()
 	{
-		$data = $this->gateway->getAll();
+		$data = $this->casinoGateway->getAll();
 		$entities = [];
 		foreach ( $data as $casino)
 		{
@@ -45,4 +46,10 @@ class Casino implements RepositoryInterface {
 		return $entities;
 
 	}
+
+	public function getLocalisationByPostCode($postCode)
+	{
+		return $this->localisationGateway->getLocalisationByPostCode($postCode);
+	}
+
 }

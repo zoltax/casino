@@ -13,7 +13,8 @@ class CasinoController extends Controller
     public function __construct()
     {
         $casinoGateway = new Gateway\Casino();
-        $casinoRepository = new Casino($casinoGateway);
+        $localisationGateway = new Gateway\GeoLocalisation();
+        $casinoRepository = new Casino($casinoGateway,$localisationGateway);
         $this->casinoService = new \CC\Service\Casino($casinoRepository);
     }
 

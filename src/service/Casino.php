@@ -13,7 +13,6 @@ class Casino {
 		$this->casinoRepository = $repository;
 	}
 
-
 	public function getById($id)
 	{
 		$casinoEntity = $this->casinoRepository->getById($id);
@@ -37,7 +36,12 @@ class Casino {
 
 	public function persist($data)
 	{
-		//$entity = (new \CC\Factory\Casino())->createFromData($data);
+
+		$geoData = $this->casinoRepository->getLocalisationByPostCode($data['post_code']);
+
+		$data = array_merge($data,$geoData);
+
+//		$entity = (new \CC\Factory\Casino())->createFromData($data);
 
 		$entity = $this->casinoRepository->persist($data);
 

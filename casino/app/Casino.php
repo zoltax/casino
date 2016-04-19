@@ -15,6 +15,8 @@ class Casino  extends Model {
         'house_number',
         'address',
         'city',
+        'longitude',
+        'latitude',
     ];
 
 

@@ -4,7 +4,7 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testClass()
 	{
-		$casinoRepository = new \CC\Repository\Casino('');
+		$casinoRepository = new \CC\Repository\Casino('','');
 
 		$casinoService = new CC\Service\Casino($casinoRepository);
 		$this->assertEquals("CC\Service\Casino",get_class($casinoService));

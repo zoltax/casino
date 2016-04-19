@@ -3,7 +3,7 @@
 namespace CC\Repository;
 
 
-class OpeningTime implements RepositoryInterface {
+class OpeningTime {
 
 	private $gateway = NULL;
 

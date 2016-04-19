@@ -45,13 +45,14 @@ class Casino {
 	public function persist($data)
 	{
 
-		if ( isset($data['id']))
+		if ( isset($data['id']) && !empty($data['id']))
 		{
 			$casino = \App\Casino::where('id',$data['id'])->first();
 			$casino->fill($data);
 		}
 		else
 		{
+
 			$casino = \App\Casino::create($data);
 		}
 

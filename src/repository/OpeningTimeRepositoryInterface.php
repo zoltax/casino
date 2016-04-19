@@ -3,9 +3,9 @@
 namespace CC\repository;
 
 
-interface RepositoryInterface {
+interface OpeningTimesRepositoryInterface  {
 
-	public function __construct($casinoGateway,$localisationGateway);
+	public function __construct($gateway);
 
 	public function getById($id);
 

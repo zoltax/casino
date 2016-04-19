@@ -4,7 +4,7 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testClass()
 	{
-		$casinoRepository = new \CC\Repository\Casino('');
+		$casinoRepository = new \CC\Repository\Casino('','');
 		$this->assertEquals('CC\Repository\Casino',get_class($casinoRepository));
 
 		// class implements the interface, so we need to test for methods
@@ -16,11 +16,15 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddGateway()
 	{
-		$gateway = Mockery::mock()->
+		$casinoGateway = Mockery::mock()->
 			shouldReceive('getById')->andReturn([])->mock();
 
-		$casinoRepository = new \CC\Repository\Casino($gateway);
-		$this->assertTrue(property_exists($casinoRepository,'gateway'));
+		$localisationGateway = Mockery::mock()->
+		shouldReceive('getById')->andReturn([])->mock();
+
+		$casinoRepository = new \CC\Repository\Casino($casinoGateway,$localisationGateway);
+		$this->assertTrue(property_exists($casinoRepository,'casinoGateway'));
+		$this->assertTrue(property_exists($casinoRepository,'localisationGateway'));
 	}
 
 	public function testGetById()
@@ -40,10 +44,12 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$casinoEntity = (new \CC\Factory\Casino())->createFromData($data);
 
 
-		$gateway = Mockery::mock()->
+		$casinoGateway = Mockery::mock()->
 			shouldReceive('getById')->andReturn($casinoEntity->asArray())->mock();
 
-		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$localisationGateway = Mockery::mock();
+
+		$casinoRepository = new \CC\Repository\Casino($casinoGateway,$localisationGateway);
 		$returnedEntity = $casinoRepository->getById(1);
 
 		$this->assertEquals($casinoEntity, $returnedEntity);
@@ -59,7 +65,9 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$gateway = Mockery::mock()->
 			shouldReceive('persist')->andReturn($casinoEntity->asArray())->mock();
 
-		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$localisationGateway = Mockery::mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
 		$data = $casinoRepository->persist($casinoEntity->asArray());
 
 		$this->assertEquals($casinoEntity, $data);
@@ -71,7 +79,9 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$gateway = Mockery::mock()->
 			shouldReceive('delete')->andReturn(true)->mock();
 
-		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$localisationGateway = Mockery::mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
 		$status = $casinoRepository->delete(1);
 
 		$this->assertTrue($status);
@@ -88,11 +98,28 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$gateway = Mockery::mock()->
 			shouldReceive('getAll')->andReturn([$casinoEntity->asArray()])->mock();
 
-		$casinoRepository = new \CC\Repository\Casino($gateway);
+		$localisationGateway = Mockery::mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
 		$data = $casinoRepository->getAll();
 
 		$this->assertEquals([$casinoEntity],$data);
 
+	}
+
+	public function testGeoLocalisation()
+	{
+		$resp = '{"postcode":"NE15 6NW","geo":{"lat":54.975307836474464,"lng":-1.6739561458838577,"easting":420967.0,"northing":564570.0,"geohash":"http://geohash.org/gcyb9zvn3upv"},"administrative":{"council":{"title":"Newcastle upon Tyne","uri":"http://statistics.data.gov.uk/id/statistical-geography/E08000021","code":"E08000021"},"ward":{"title":"Benwell and Scotswood","uri":"http://statistics.data.gov.uk/id/statistical-geography/E05001089","code":"E05001089"},"constituency":{"title":"Newcastle upon Tyne Central","uri":"http://statistics.data.gov.uk/id/statistical-geography/E14000831","code":"E14000831"}}}';
+
+		$gateway = Mockery::mock();;
+
+		$localisationGateway = Mockery::mock()->
+		shouldReceive('getLocalisationByPostCode')->andReturn($resp)->mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
+		$data = $casinoRepository->getLocalisationByPostCode('NE156NW');
+
+		$this->assertEquals($data, json_decode($resp));
 	}
 
 
