@@ -11,9 +11,7 @@
 |
 */
 
-$app->get('/', function() use ($app) {
-    return $app->version();
-});
+$app->get('/', 'CasinoController@index');
 
 $app->get('/casino', 'CasinoController@index');
 
