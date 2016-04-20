@@ -36,22 +36,28 @@ class Casino {
 
 	public function persist($data)
 	{
-
 		$geoData = $this->casinoRepository->getLocalisationByPostCode($data['post_code']);
-
 		$data = array_merge($data,$geoData);
-
-//		$entity = (new \CC\Factory\Casino())->createFromData($data);
-
 		$entity = $this->casinoRepository->persist($data);
-
 		return $entity->asArray();
 
+	}
+
+	public function getLocalisationByPostCode($postCode)
+	{
+		return $this->casinoRepository->getLocalisationByPostCode($postCode);
 	}
 
 	public function delete($id)
 	{
 		return $this->casinoRepository->delete($id);
 	}
+
+	public function getNearest($postCode)
+	{
+		return $this->casinoRepository->getNearestCasinos($postCode);
+
+	}
+
 
 }

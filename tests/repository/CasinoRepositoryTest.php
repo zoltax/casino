@@ -114,12 +114,39 @@ class CasinoRepositoryTest extends PHPUnit_Framework_TestCase {
 		$gateway = Mockery::mock();;
 
 		$localisationGateway = Mockery::mock()->
-		shouldReceive('getLocalisationByPostCode')->andReturn($resp)->mock();
+			shouldReceive('getLocalisationByPostCode')->andReturn($resp)->mock();
 
 		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
 		$data = $casinoRepository->getLocalisationByPostCode('NE156NW');
 
-		$this->assertEquals($data, json_decode($resp));
+		$this->assertEquals($data, $resp);
+	}
+
+	public function testFindNearest()
+	{
+		$gateway = Mockery::mock();
+
+		$resp = '{"postcode":"NE15 6NW","geo":{"lat":54.975307836474464,"lng":-1.6739561458838577,"easting":420967.0,"northing":564570.0,"geohash":"http://geohash.org/gcyb9zvn3upv"},"administrative":{"council":{"title":"Newcastle upon Tyne","uri":"http://statistics.data.gov.uk/id/statistical-geography/E08000021","code":"E08000021"},"ward":{"title":"Benwell and Scotswood","uri":"http://statistics.data.gov.uk/id/statistical-geography/E05001089","code":"E05001089"},"constituency":{"title":"Newcastle upon Tyne Central","uri":"http://statistics.data.gov.uk/id/statistical-geography/E14000831","code":"E14000831"}}}';
+
+		$data = [
+			[
+				'id' => 1,
+				'name' => 'name',
+				'latitude' => '54.975307836474',
+				'longitude' => '-1.6739561458839',
+				'distance' => '39.66252087009066'
+			]
+		];
+
+		$localisationGateway = Mockery::mock()->
+			shouldReceive('getNearest')->andReturn($data)->
+			shouldReceive('getLocalisationByPostCode')->andReturn($resp)->mock();
+
+		$casinoRepository = new \CC\Repository\Casino($gateway,$localisationGateway);
+		$nearest = $casinoRepository->getNearestCasinos('NE156NW');
+
+		$this->assertEquals($data,$nearest);
+
 	}
 
 

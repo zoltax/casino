@@ -11,7 +11,7 @@
 |
 */
 
-$app->get('/', function () use ($app) {
+$app->get('/', function() use ($app) {
     return $app->version();
 });
 
@@ -24,3 +24,5 @@ $app->post('/casino/save', 'CasinoController@save');
 $app->get('/casino/edit/{id}', 'CasinoController@edit');
 
 $app->get('/casino/delete/{id}', 'CasinoController@delete');
+
+$app->get('/casino/find/{postcode}', 'CasinoController@find');

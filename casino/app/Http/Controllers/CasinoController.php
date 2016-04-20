@@ -49,4 +49,13 @@ class CasinoController extends Controller
 
     }
 
+    public function find($postCode)
+    {
+        $casinos = $this->casinoService->getNearest($postCode);
+
+        $localisation = $this->casinoService->getLocalisationByPostCode($postCode);
+
+        return view('find',['casinos' => $casinos,'localisation' => $localisation ]);
+    }
+
 }

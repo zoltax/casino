@@ -74,6 +74,7 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 
 		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
 			->shouldReceive('persist')->andReturn($casinoEntity)
+			->shouldReceive('getLocalisationByPostCode')->andReturn([])
 			->mock();
 
 		$casinoService = new CC\Service\Casino($casinoRepository);
@@ -97,6 +98,30 @@ class CasinoServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($status);
 
 	}
+
+	public function testFineNearest()
+	{
+
+		$data =
+			[
+				[
+				'latitude' => '54.975307836474',
+				'longitude' => '-1.6739561458839',
+				'distance' => '39.66252087009066'
+				]
+			];
+
+		$casinoRepository = Mockery::mock('\CC\Repository\Casino')
+			->shouldReceive('getNearestCasinos')->andReturn($data)
+			->mock();
+
+		$casinoService = new CC\Service\Casino($casinoRepository);
+
+		$nearest = $casinoService->getNearest("NE146NW");
+
+		$this->assertEquals($data,$nearest);
+	}
+
 
 
 }

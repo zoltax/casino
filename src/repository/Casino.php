@@ -52,4 +52,10 @@ class Casino implements RepositoryInterface {
 		return $this->localisationGateway->getLocalisationByPostCode($postCode);
 	}
 
+	public function getNearestCasinos($postCode)
+	{
+		$data = $this->getLocalisationByPostCode($postCode);
+		return $this->localisationGateway->getNearest($data);
+	}
+
 }
