@@ -1,0 +1,35 @@
+Deployment of the application is straightforward.
+
+Unzip casino.zip ( https://github.com/zoltax/casino/blob/dc05d47cdaf8190cf23d5e29e0446f458844eae8/casino.zip )  in any directory and run:
+
+php -S 127.0.0.1:7000 -t casino/public
+
+in casino directory
+
+Php installed locally is required.
+
+Database details are provided in:  `casino/.env` file.
+
+DB details provided are pointing at my remote server.
+
+If local database is required, following query has to be executed:
+
+`
+CREATE TABLE `casino` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) DEFAULT NULL,
+  `post_code` varchar(15) DEFAULT NULL,
+  `house_number` int(10) DEFAULT NULL,
+  `address` varchar(125) DEFAULT NULL,
+  `city` varchar(125) DEFAULT NULL,
+  `latitude` varchar(30) DEFAULT NULL,
+  `longitude` varchar(30) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+`
+
+This is only table which is required by the application.
+
+
