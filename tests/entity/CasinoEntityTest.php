@@ -101,4 +101,28 @@ class CasinoEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertCount(2, $casino->getOpeningTimes());
 	}
 
+	public function testIsValid()
+	{
+		$casino = new Entity\Casino();
+
+		$this->assertTrue($casino->valid());
+		$casino->setAsInvalid();
+
+		$this->assertFalse($casino->valid());
+		$casino->setAsValid();
+		$this->assertTrue($casino->valid());
+
+	}
+
+	public function testSetError()
+	{
+		$casino = new Entity\Casino();
+
+		$this->assertEmpty($casino->getError());
+
+		$casino->setError("name");
+
+		$this->assertEquals($casino->getError(),"name");
+	}
+
 }

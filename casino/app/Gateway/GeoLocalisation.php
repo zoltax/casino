@@ -28,7 +28,7 @@ class GeoLocalisation {
 	public function getNearest($data)
 	{
 
-		return DB::select('SELECT id,name,latitude, longitude, SQRT(
+		return DB::select('SELECT id,name,latitude, longitude,house_number,post_code,address,city, SQRT(
 			POW(69.1 * (latitude - '.$data['latitude'].'), 2) +
 			POW(69.1 * ('.$data['longitude'].' - longitude) * COS(latitude / 57.3), 2)) AS distance
 			FROM casino HAVING distance < 2025 ORDER BY distance;');

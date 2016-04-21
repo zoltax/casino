@@ -23,4 +23,6 @@ $app->get('/casino/edit/{id}', 'CasinoController@edit');
 
 $app->get('/casino/delete/{id}', 'CasinoController@delete');
 
+$app->get('/casino/find', 'CasinoController@find');
+
 $app->get('/casino/find/{postcode}', 'CasinoController@find');

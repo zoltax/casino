@@ -14,6 +14,33 @@ class Casino extends AbstractEntity {
 	private $latitude       = NULL;
 	private $longitude      = NULL;
 	private $openingTime    = [];
+	private $isValid        = True;
+	private $error          = "";
+
+	public function getError()
+	{
+		return $this->error;
+	}
+
+	public function setError($error)
+	{
+		$this->error = $error;
+	}
+
+	public function setAsValid()
+	{
+		$this->isValid = True;
+	}
+
+	public function setAsInvalid()
+	{
+		$this->isValid = False;
+	}
+
+	public function valid()
+	{
+		return $this->isValid;
+	}
 
 	/**
 	 * @return null

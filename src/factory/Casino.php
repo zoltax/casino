@@ -14,27 +14,37 @@ class Casino implements FactoryInterface {
 			$casinoEntity->setId($data['id']);
 		}
 
-		if (isset($data['name']))
+		if (isset($data['post_code']) && !empty($data['post_code']))
+		{
+			$casinoEntity->setPostCode($data['post_code']);
+		}
+		else
+		{
+			$casinoEntity->setAsInvalid();
+			$casinoEntity->setError("post code is required");
+		}
+
+		if (isset($data['name']) && !empty($data['name']))
 		{
 			$casinoEntity->setName($data['name']);
 		}
+		else
+		{
+			$casinoEntity->setAsInvalid();
+			$casinoEntity->setError("name is required");
+		}
 
-		if (isset($data['address']))
+		if (isset($data['address']) && !empty($data['address']))
 		{
 			$casinoEntity->setAddress($data['address']);
 		}
 
-		if (isset($data['post_code']))
-		{
-			$casinoEntity->setPostCode($data['post_code']);
-		}
-
-		if (isset($data['house_number']))
+		if (isset($data['house_number']) && !empty($data['house_number']))
 		{
 			$casinoEntity->setHouseNumber($data['house_number']);
 		}
 
-		if (isset($data['city']))
+		if (isset($data['city']) && !empty($data['city']))
 		{
 			$casinoEntity->setCity($data['city']);
 		}

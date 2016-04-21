@@ -16,45 +16,35 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Casino App</a>
+            <a class="navbar-brand" href="/casino/find">Find a casino</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        </div><!--/.navbar-collapse -->
+        </div>
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Welcome in super casino application!!</h1>
-        <p>By clicking this link you can change the world!.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <h1>Welcome in super casino application!</h1>
     </div>
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-12">
             @yield('content')
         </div>
     </div>
         @yield('map')
-
     <hr>
 
     <footer>
         <p>&copy; 2016 Php test; Casino Company, Inc.</p>
     </footer>
-</div> <!-- /container -->
+</div>
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

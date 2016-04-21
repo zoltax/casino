@@ -31,8 +31,15 @@ class CasinoController extends Controller
 
     public function save(Request $request)
     {
-        $this->casinoService->persist($request->all());
-        return redirect('/casino');
+        $status = $this->casinoService->persist($request->all());
+
+        if ( $status === True)
+        {
+            return redirect('/casino');
+        } else {
+            return view('add',['error' => $status]);
+        }
+
     }
 
     public function edit($id)
@@ -44,18 +51,27 @@ class CasinoController extends Controller
 
     public function delete($id)
     {
-        $status = $this->casinoService->delete($id);
+        $this->casinoService->delete($id);
         return redirect('/casino');
 
     }
 
-    public function find($postCode)
+    public function find(Request $request)
     {
-        $casinos = $this->casinoService->getNearest($postCode);
+        $data = $request->all();
 
-        $localisation = $this->casinoService->getLocalisationByPostCode($postCode);
+        if (empty($data['post_code']))
+        {
+            return view('postcode');
+        }
+        else
+        {
+            $casinos = $this->casinoService->getNearest($data['post_code']);
+            $localisation = $this->casinoService->getLocalisationByPostCode($data['post_code']);
 
-        return view('find',['casinos' => $casinos,'localisation' => $localisation ]);
+            return view('find',['casinos' => $casinos,'localisation' => $localisation ]);
+        }
+
     }
 
 }

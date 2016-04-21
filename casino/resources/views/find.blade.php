@@ -21,7 +21,7 @@
             lng: '{{ $casino->longitude }}',
             title: '{{ $casino->name }}',
             infoWindow: {
-                content: '<p>Casino name: <b>{{ $casino->name }}</b></p><p>Distance: <b>{{ $casino->distance }} </b></p>'
+                content: '<p>Casino name: <b>{{ $casino->name }}</b><p>Casino address: <b>{{ $casino->house_number .' '. $casino->address .' '. $casino->city }}</b></p><p>Distance: <b>{{ round($casino->distance,2) }} </b></p>'
             }
         });
         @endforeach
@@ -33,18 +33,38 @@
 
 @section('content')
 
-    <p><a class="btn btn-primary btn-link" href="/casino/add" role="button">Add a new casino</a></p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><b>Casino name</b></td>
+            <td><b>Address</b></td>
+            <td><b>Post Code</b></td>
+            <td><b>Distance</b></td>
+        </tr>
+        </thead>
 
-    @foreach($casinos as $casino)
-        <div class="row">
-            This is a {{ $casino->name }}
-            Longitude {{ $casino->longitude }}
-            Latitude {{ $casino->latitude }}
-            Distance {{ $casino->distance }}
-        </div>
-    @endforeach
+        @foreach($casinos as $casino)
+            <tbody>
+            <tr>
+                <td>
+                    {{ $casino->name }}
+                </td>
+                <td>
+                    {{ $casino->house_number .' '. $casino->address .' '. $casino->city }}
+                </td>
+                <td>
+                    {{ $casino->post_code }}
+                </td>
+                <td>
+                    {{ round($casino->distance,2) }}
+                </td>
+
+            </tr>
+            </tbody>
+        @endforeach
 
 
+    </table>
 
 @endsection
 
