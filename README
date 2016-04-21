@@ -1,1 +1,37 @@
-Ca
+Casino Application
+Filip Kulig
+
+
+Casino Application is simple PHP based application. The idea behind this app can be divided into two separate stages.
+
+CORE, business logic is completely separated from PHP framework, in this case Lumen.
+Business logic of the application was written in TTD manner, using clean architecture approach.
+Because of this the business logic is separated, very well tested and framework independent.
+
+In bigger application this approach can ensure us that solution will be always working.
+
+What did went well.
+	- Clean architecture and TTD.
+		It has helped me to write code quickly. Code is open to new modification, and that can be introduced quickly, because of high code test coverage.
+	- Google maps integration.
+		Google maps code is simple, and open to further modifications.
+	- Lumen as a external library dependencies
+		I've used lumen to provide a connection to business logic and external world ( DB and geo localisation API )
+
+
+What I'am unsure about:
+	- Lumen
+		I'd don't like how lumen is build and his lack of documentation, despite the fact that some part are well written. Lumen was a poor choose, I should have chosen the framework that I'm familiar with.
+
+What did not went well:
+	- Because I've chosen the Lumen as a framework, I didn't finish all requested requirements.
+	- Missing requirement:
+		- Authorisation, right now application is open to everybody.
+		- Opening times are not implemented.
+
+	If I would have chosen different, but familiar framework I would complete full test in less time.
+
+
+
+
+Filip Kulig
